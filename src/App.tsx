@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [tanggalMulai, setTanggalMulai] = useState("");
   const [tanggalSelesai, setTanggalSelesai] = useState("");
   const [editId, setEditId] = useState<number | null>(null);
+  const [filterStatus, setFilterStatus] = useState("Semua");
 
 // 1. Pastikan kedua fungsi ambil data sudah didefinisikan di atas
 const fetchReservations = async () => {
@@ -142,7 +143,6 @@ const handleUpdateStatus = async (id: number, statusBaru: string) => {
   <div>
     <p className="text-sm text-gray-500">Pending</p>
     <p className="text-xl font-bold">
-      {reservations.filter(r => r.status === "Menunggu" || !r.status).length}
     </p>
   </div>
 </div>
@@ -151,6 +151,22 @@ const handleUpdateStatus = async (id: number, statusBaru: string) => {
             <div><p className="text-sm text-gray-500">Ruangan Aktif</p><p className="text-xl font-bold">{rooms.length}</p></div>
           </div>
         </div>
+
+        <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
+  {["Semua", "Menunggu", "Disetujui", "Ditolak"].map((tab) => (
+    <button
+      key={tab}
+      onClick={() => setFilterStatus(tab)}
+      className={`px-5 py-2 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+        filterStatus === tab 
+        ? "bg-indigo-600 text-white shadow-lg shadow-indigo-100" 
+        : "bg-white text-gray-400 hover:bg-gray-50 border border-gray-100"
+      }`}
+    >
+      {tab}
+    </button>
+  ))}
+</div>
 
         {/* SEARCH */}
         <div className="relative">
@@ -177,9 +193,14 @@ const handleUpdateStatus = async (id: number, statusBaru: string) => {
             </thead>
             <tbody className="divide-y divide-gray-50">
   {reservations
-    .filter((val) =>
-      val?.namaPeminjam?.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    .filter((item) => {
+      // 1. Filter berdasarkan pencarian nama
+      const matchSearch = item?.namaPeminjam?.toLowerCase().includes(searchTerm.toLowerCase());
+      // 2. Filter berdasarkan Tab Status yang dipilih
+      const matchStatus = filterStatus === "Semua" || item.status === filterStatus;
+      
+      return matchSearch && matchStatus;
+    })
     .map((item: any) => (
       <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
         <td className="px-6 py-4 font-medium text-gray-700">{item.namaPeminjam}</td>
@@ -257,6 +278,9 @@ const handleUpdateStatus = async (id: number, statusBaru: string) => {
           </table>
         </div>
       </div>
+
+          {/* TABS FILTER STATUS */}
+
 
       {/* MODAL POPUP */}
       {isModalOpen && (
