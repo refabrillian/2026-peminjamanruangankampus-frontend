@@ -1,77 +1,36 @@
-HEAD
-# React + TypeScript + Vite
+# 2026-peminjamanruangankampus-frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Antarmuka pengguna (UI) dari Sistem Peminjaman Ruangan Kampus yang memungkinkan pengguna untuk melakukan reservasi ruangan secara interaktif dan real-time.
 
-Currently, two official plugins are available:
+## Features
+- **Dashboard Reservasi:** Menampilkan daftar ruangan yang dipinjam.
+- **Form Peminjaman:** Antarmuka untuk memasukkan data peminjaman baru.
+- **Responsive Design:** Tampilan yang optimal di berbagai perangkat.
+- **API Integration:** Terhubung langsung dengan server Backend melalui Axios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- **Framework:** React.js dengan Vite
+- **Bahasa:** TypeScript
+- **Koneksi API:** Axios
 
-## React Compiler
+## Environment Variables
+Pastikan file `.env` sudah diatur dengan variabel berikut:
+- `VITE_API_URL`: URL Endpoint Backend (Contoh: `http://localhost:5009/api`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
+1. Clone repositori ini.
+2. Instal dependensi:
+   ```bash
+   npm install
+Salin file .env.example menjadi .env dan sesuaikan URL API.
 
-## Expanding the ESLint configuration
+## Usage
+Jalankan aplikasi dalam mode pengembangan:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Bash
+npm run dev
+Akses aplikasi melalui http://localhost:5173.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-=======
-# -2026-peminjamanruangankampus-frontend
-137c62a1789904552ab58fffd761ed475d720d00
+## License
+Distributed under the MIT License.
