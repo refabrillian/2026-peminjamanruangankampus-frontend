@@ -143,6 +143,7 @@ const handleUpdateStatus = async (id: number, statusBaru: string) => {
   <div>
     <p className="text-sm text-gray-500">Pending</p>
     <p className="text-xl font-bold">
+      {reservations.filter(r => r.status === "Menunggu" || !r.status).length}
     </p>
   </div>
 </div>
